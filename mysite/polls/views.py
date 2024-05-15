@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
@@ -25,6 +25,12 @@ class ResultsView(LoginRequiredMixin, generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
+    def get(self, request, *args, **kwargs):
+        if not request.session.get('can_view_results'):
+            raise Http404("Results cannot be accessed directly.")
+        request.session['can_view_results'] = False  # Reset the flag
+        return super().get(request, *args, **kwargs)
+
 @login_required
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -38,4 +44,5 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
+        request.session['can_view_results'] = True  # Set the flag
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
