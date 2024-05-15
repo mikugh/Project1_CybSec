@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-*cw+0+11o^vj)u@8z-bgs35$3a7czhjncd1u8&iapj*%@j)^8)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#DEBUG = False
+#ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
 
 
 # Application definition
@@ -129,3 +130,7 @@ LOGIN_URL = 'http://127.0.0.1:8000/accounts/login/'
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/polls/'
 
 LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/accounts/login/'
+
+SESSION_COOKIE_AGE = 60
+
+SESSION_SAVE_EVERY_REQUEST = True
