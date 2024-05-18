@@ -8,8 +8,8 @@
 
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
 
-
 <form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
+    <!--Uncomment code under this line to fix flaw #1!--> 
+  <!--{% csrf_token %}--> 
     <button type="submit">Log Out</button>
   </form>
