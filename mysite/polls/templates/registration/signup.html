@@ -5,7 +5,8 @@
 {% block content %}
 <h2>Sign up</h2>
 <form method="post">
-  {% csrf_token %}
+  <!--Uncomment code under this line to fix flaw #1!--> 
+  <!--{% csrf_token %}--> 
   {{ form }}
   <button type="submit">Sign Up</button>
   <button onclick="location.href = '/accounts/login'">Back</button>
