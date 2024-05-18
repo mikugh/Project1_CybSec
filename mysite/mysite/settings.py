@@ -23,8 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*cw+0+11o^vj)u@8z-bgs35$3a7czhjncd1u8&iapj*%@j)^8)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
+DEBUG = True # This code should be removed or commented to fix flaw #5!
+
+#The variables DEBUG and ALLOWED_HOSTS should be uncommented to fix flaw #5!
 #DEBUG = False
 #ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
 
@@ -34,12 +36,12 @@ DEBUG = True
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth', #The application used for the login
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
+    'accounts', #The application used for the sign up
 ]
 
 MIDDLEWARE = [
@@ -125,12 +127,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = 'http://127.0.0.1:8000/accounts/login/'
+LOGIN_URL = 'http://127.0.0.1:8000/accounts/login/' #The URL for the login page
 
-LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/polls/'
+LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/polls/' #The URL that the user is redirected to after logging in
 
-LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/accounts/login/'
+LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/accounts/login/' #The URL that the user is redirected to after logging out
 
-SESSION_COOKIE_AGE = 60
-
-SESSION_SAVE_EVERY_REQUEST = True
+#The variables SESSION_COOKIE_AGE and SESSION_SAVE_EVERY_REQUEST should be uncommented to fix flaw #4!
+#SESSION_COOKIE_AGE = 60
+#SESSION_SAVE_EVERY_REQUEST = True
