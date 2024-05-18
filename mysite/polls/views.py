@@ -7,31 +7,35 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Choice, Question
 
-class IndexView(LoginRequiredMixin, generic.ListView):
+# Class for creating the index view
+class IndexView(LoginRequiredMixin, generic.ListView): #Added a parameter "LoginRequiredMixin" that checks that the user is logged in
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
+    # Function that returns the last five published questions
     def get_queryset(self):
-        """Return the last five published questions."""
         return Question.objects.order_by('-pub_date')[:5]
 
-
-class DetailView(LoginRequiredMixin, generic.DetailView):
+# Class for creating the detail view
+class DetailView(LoginRequiredMixin, generic.DetailView): #Added a parameter "LoginRequiredMixin" that checks that the user is logged in
     model = Question
     template_name = 'polls/detail.html'
 
-
-class ResultsView(LoginRequiredMixin, generic.DetailView):
+# Class for creating the results view
+class ResultsView(LoginRequiredMixin, generic.DetailView): #Added a parameter "LoginRequiredMixin" that checks that the user is logged in
     model = Question
     template_name = 'polls/results.html'
 
-    def get(self, request, *args, **kwargs):
+    # Function that checks if a user has voted before accessing the results
+    # This function should be uncommented to fix flaw #2! (see line 51 also)
+    """def get(self, request, *args, **kwargs):
         if not request.session.get('can_view_results'):
             raise Http404("Results cannot be accessed directly.")
         request.session['can_view_results'] = False  # Reset the flag
-        return super().get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)"""
 
-@login_required
+# Function that allows the user to vote in a poll
+@login_required #Tag that makes sure the user is logged in
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -44,5 +48,6 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
-        request.session['can_view_results'] = True  # Set the flag
+        # The code under this comment should be uncommented to fix flaw #2!
+        #request.session['can_view_results'] = True  # Set the flag for the get() function
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
