@@ -35,7 +35,7 @@ class ResultsView(LoginRequiredMixin, generic.DetailView): #Added a parameter "L
         return super().get(request, *args, **kwargs)"""
 
 # Function that allows the user to vote in a poll
-@login_required #Tag that makes sure the user is logged in
+@login_required #Makes sure the user is logged in
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
