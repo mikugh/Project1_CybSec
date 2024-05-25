@@ -36,19 +36,20 @@ DEBUG = True # This code should be removed or commented to fix flaw #5!
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'django.contrib.admin',
-    'django.contrib.auth', #The application used for the login
+    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts', #The application used for the sign up
+    'accounts',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #Uncomment line under this code to fix flaw #1!
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -89,7 +90,8 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
+# The code under this line should be uncommented to fix flaw #3!
+"""AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
@@ -102,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
-]
+]"""
 
 
 # Internationalization
@@ -134,5 +136,5 @@ LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/polls/' #The URL that the user is re
 LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/accounts/login/' #The URL that the user is redirected to after logging out
 
 #The variables SESSION_COOKIE_AGE and SESSION_SAVE_EVERY_REQUEST should be uncommented to fix flaw #4!
-#SESSION_COOKIE_AGE = 60
+#SESSION_COOKIE_AGE = 300
 #SESSION_SAVE_EVERY_REQUEST = True
