@@ -1,8 +1,7 @@
 <!-- templates/registration/login.html -->
 <h2>Polls!</h2>
 <form method="post">
-  <!--Uncomment code under this line to fix flaw #1!--> 
-  <!--{% csrf_token %}--> 
+  {% csrf_token %}
   {{ form }}
   <button type="submit">Log In</button>
   <button onclick="location.href = '/accounts/signup'">Sign Up</button>
