@@ -19,13 +19,13 @@ class IndexView(LoginRequiredMixin, generic.ListView): #Added a parameter "Login
         return Question.objects.order_by('-pub_date')[:5]
 
 # Class for creating the detail view
-@method_decorator(csrf_protect, name="dispatch")
+@method_decorator(csrf_protect, name="dispatch") #Decorator for CSRF-protection
 class DetailView(LoginRequiredMixin, generic.DetailView): #Added a parameter "LoginRequiredMixin" that checks that the user is logged in
     model = Question
     template_name = 'polls/detail.html'
 
 # Class for creating the results view
-@method_decorator(csrf_protect, name="dispatch")
+@method_decorator(csrf_protect, name="dispatch") #Decorator for CSRF-protection
 class ResultsView(LoginRequiredMixin, generic.DetailView): #Added a parameter "LoginRequiredMixin" that checks that the user is logged in
     model = Question
     template_name = 'polls/results.html'
