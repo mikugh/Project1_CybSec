@@ -4,10 +4,11 @@
         <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
     {% endfor %}
     </ul>
-    <form action="{% url 'logout' %}" method="post">
+    <!--Uncomment the code under this line to fix flaw #4!-->
+    <!--<form action="{% url 'logout' %}" method="post">
         {% csrf_token %}
         <button type="submit">Log Out</button>
-      </form>
+      </form>-->
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
