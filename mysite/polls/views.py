@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.decorators.csrf import csrf_protect
+from django.utils.decorators import method_decorator
 
 from .models import Choice, Question
 
@@ -17,11 +19,13 @@ class IndexView(LoginRequiredMixin, generic.ListView): #Added a parameter "Login
         return Question.objects.order_by('-pub_date')[:5]
 
 # Class for creating the detail view
+@method_decorator(csrf_protect, name="dispatch")
 class DetailView(LoginRequiredMixin, generic.DetailView): #Added a parameter "LoginRequiredMixin" that checks that the user is logged in
     model = Question
     template_name = 'polls/detail.html'
 
 # Class for creating the results view
+@method_decorator(csrf_protect, name="dispatch")
 class ResultsView(LoginRequiredMixin, generic.DetailView): #Added a parameter "LoginRequiredMixin" that checks that the user is logged in
     model = Question
     template_name = 'polls/results.html'
@@ -35,7 +39,9 @@ class ResultsView(LoginRequiredMixin, generic.DetailView): #Added a parameter "L
         return super().get(request, *args, **kwargs)"""
 
 # Function that allows the user to vote in a poll
-@login_required #Makes sure the user is logged in
+@login_required
+#Uncomment @csrf_protect to fix flaw #1!
+#@csrf_protect
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -48,6 +54,6 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
-        # The code under this comment should be uncommented to fix flaw #2!
+        # The code under this line should be uncommented to fix flaw #2!
         #request.session['can_view_results'] = True  # Set the flag for the get() function
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
