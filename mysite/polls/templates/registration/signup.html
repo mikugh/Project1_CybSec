@@ -9,8 +9,4 @@
   {{ form }}
   <button type="submit">Sign Up</button>
 </form>
-<form action="{% url 'logout' %}" method="post">
-  {% csrf_token %}
-  <button type="submit">Back</button>
-</form>
 {% endblock %}
