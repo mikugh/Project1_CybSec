@@ -89,7 +89,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
-# The code under this line should be uncommented to fix flaw #3!
+# The code under this line should be uncommented to fix flaw #4!
 """AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -134,6 +134,6 @@ LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/polls/' #The URL that the user is re
 
 LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/accounts/login/' #The URL that the user is redirected to after logging out
 
-#The variables SESSION_COOKIE_AGE and SESSION_SAVE_EVERY_REQUEST should be uncommented to fix flaw #4!
+#The variables SESSION_COOKIE_AGE and SESSION_SAVE_EVERY_REQUEST should be uncommented to fix flaw #3!
 #SESSION_COOKIE_AGE = 300
 #SESSION_SAVE_EVERY_REQUEST = True
