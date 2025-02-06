@@ -1,2 +1,2 @@
 # CybSec_Project
-Repository for Project1 in CyberSecurity
+Repository for Cybersecurity Project
